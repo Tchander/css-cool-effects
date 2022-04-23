@@ -7,20 +7,20 @@ import Clocks from "@/pages/Clocks";
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: ROUTES.home,
-    component: Home,
-  },
-  {
-    path: ROUTES.clocks,
-    component: Clocks,
-  },
+    {
+        path: ROUTES.home,
+        component: Home,
+    },
+    {
+        path: ROUTES.clocks,
+        component: Clocks,
+    },
 ];
 
 const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes,
+    mode: "history",
+    base: process.env.BASE_URL,
+    routes,
 });
 
 export default router;

@@ -18,43 +18,43 @@
 <script>
 import BackHome from "@/components/BackHome";
 export default {
-  name: "Clocks",
-  components: { BackHome },
-  data() {
-    return {
-      day: null,
-      hh: null,
-      mm: null,
-      ss: null,
-    };
-  },
+    name: "Clocks",
+    components: { BackHome },
+    data() {
+        return {
+            day: null,
+            hh: null,
+            mm: null,
+            ss: null,
+        };
+    },
 
-  mounted() {
-    this.changeTime();
-  },
+    mounted() {
+        this.changeTime();
+    },
 
-  computed: {
-    hourStyle() {
-      return { transform: `rotateZ(${this.hh + this.mm / 12}deg)` };
+    computed: {
+        hourStyle() {
+            return { transform: `rotateZ(${this.hh + this.mm / 12}deg)` };
+        },
+        minuteStyle() {
+            return { transform: `rotateZ(${this.mm}deg)` };
+        },
+        secondStyle() {
+            return { transform: `rotateZ(${this.ss}deg)` };
+        },
     },
-    minuteStyle() {
-      return { transform: `rotateZ(${this.mm}deg)` };
-    },
-    secondStyle() {
-      return { transform: `rotateZ(${this.ss}deg)` };
-    },
-  },
 
-  methods: {
-    changeTime() {
-      setInterval(() => {
-        this.day = new Date();
-        this.hh = this.day.getHours() * 30;
-        this.mm = this.day.getMinutes() * 6;
-        this.ss = this.day.getSeconds() * 6;
-      });
+    methods: {
+        changeTime() {
+            setInterval(() => {
+                this.day = new Date();
+                this.hh = this.day.getHours() * 30;
+                this.mm = this.day.getMinutes() * 6;
+                this.ss = this.day.getSeconds() * 6;
+            });
+        },
     },
-  },
 };
 </script>
 

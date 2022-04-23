@@ -4,18 +4,18 @@
 
 <script>
 export default {
-  name: "PageLink",
-  props: {
-    link: {
-      type: String,
-      required: true,
-      default: "/",
+    name: "PageLink",
+    props: {
+        link: {
+            type: String,
+            required: true,
+            default: "/",
+        },
+        linkText: {
+            type: String,
+            default: "Back",
+        },
     },
-    linkText: {
-      type: String,
-      default: "Back",
-    },
-  },
 };
 </script>
 

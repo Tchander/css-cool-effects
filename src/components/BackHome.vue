@@ -6,9 +6,9 @@
 import PageLink from "@/components/PageLink";
 import { ROUTES } from "@/const";
 export default {
-  ROUTES,
-  name: "BackHome",
-  components: { PageLink },
+    ROUTES,
+    name: "BackHome",
+    components: { PageLink },
 };
 </script>
 
