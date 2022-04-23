@@ -1,17 +1,21 @@
 <template>
   <div class="home">
     <nav class="nav">
-      <router-link class="nav__link" :to="$options.ROUTES.clocks"
-        >Clocks</router-link
-      >
+      <page-link
+        class="nav__link"
+        :link="$options.ROUTES.clocks"
+        :link-text="'Clocks'"
+      />
     </nav>
   </div>
 </template>
 
 <script>
 import { ROUTES } from "@/const";
+import PageLink from "@/components/PageLink";
 export default {
   ROUTES,
+  components: { PageLink },
   name: "Home",
 };
 </script>
@@ -20,15 +24,9 @@ export default {
 .nav {
   display: flex;
   align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
   padding: 50px 200px;
-  font-size: 28px;
-  font-weight: 700;
-  &__link {
-    text-decoration: none;
-    color: #fff;
-    &:hover {
-      color: #e7e7e7;
-    }
-  }
 }
 </style>

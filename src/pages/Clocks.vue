@@ -1,27 +1,27 @@
 <template>
   <div class="clocks">
+    <back-home />
     <div class="clock">
-      <div class="clock__hour">
-        <div class="clock__hr" ref="hr" />
+      <div class="clock__item">
+        <div class="clock__hour" :style="hourStyle" />
       </div>
-      <div class="clock__min">
-        <div class="clock__mn" ref="mn" />
+      <div class="clock__item">
+        <div class="clock__min" :style="minuteStyle" />
       </div>
-      <div class="clock__sec">
-        <div class="clock__sc" ref="sc" />
+      <div class="clock__item">
+        <div class="clock__sec" :style="secondStyle" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import BackHome from "@/components/BackHome";
 export default {
   name: "Clocks",
+  components: { BackHome },
   data() {
     return {
-      hr: null,
-      mn: null,
-      sc: null,
       day: null,
       hh: null,
       mm: null,
@@ -33,21 +33,25 @@ export default {
     this.changeTime();
   },
 
+  computed: {
+    hourStyle() {
+      return { transform: `rotateZ(${this.hh + this.mm / 12}deg)` };
+    },
+    minuteStyle() {
+      return { transform: `rotateZ(${this.mm}deg)` };
+    },
+    secondStyle() {
+      return { transform: `rotateZ(${this.ss}deg)` };
+    },
+  },
+
   methods: {
     changeTime() {
-      this.hr = this.$refs.hr;
-      this.mn = this.$refs.mn;
-      this.sc = this.$refs.sc;
-
       setInterval(() => {
         this.day = new Date();
         this.hh = this.day.getHours() * 30;
         this.mm = this.day.getMinutes() * 6;
         this.ss = this.day.getSeconds() * 6;
-
-        this.hr.style.transform = `rotateZ(${this.hh + this.mm / 12}deg)`;
-        this.mn.style.transform = `rotateZ(${this.mm}deg)`;
-        this.sc.style.transform = `rotateZ(${this.ss}deg)`;
       });
     },
   },
@@ -86,21 +90,19 @@ export default {
     z-index: 10000;
   }
 
-  &__hour,
-  &__min,
-  &__sec {
+  &__item {
     position: absolute;
   }
 
-  &__hr,
-  &__mn,
-  &__sc {
+  &__hour,
+  &__min,
+  &__sec {
     display: flex;
     justify-content: center;
     border-radius: 50%;
   }
 
-  &__hr {
+  &__hour {
     width: 160px;
     height: 160px;
 
@@ -115,7 +117,7 @@ export default {
     }
   }
 
-  &__mn {
+  &__min {
     width: 190px;
     height: 190px;
 
@@ -130,7 +132,7 @@ export default {
     }
   }
 
-  &__sc {
+  &__sec {
     width: 230px;
     height: 230px;
 
