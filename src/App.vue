@@ -5,9 +5,13 @@
 </template>
 
 <style lang="scss">
-body {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+body {
+  background: #010406;
+  color: #fff;
 }
 </style>
