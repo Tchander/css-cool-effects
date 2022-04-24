@@ -6,6 +6,11 @@
         :link="$options.ROUTES.clocks"
         :link-text="'Clocks'"
       />
+        <page-link
+            class="nav__link"
+            :link="$options.ROUTES.digitalClocks"
+            :link-text="'Digital Clocks'"
+        />
     </nav>
   </div>
 </template>
@@ -28,5 +33,9 @@ export default {
   top: 0;
   left: 0;
   padding: 50px 200px;
+
+  &__link {
+    margin-right: 40px;
+  }
 }
 </style>

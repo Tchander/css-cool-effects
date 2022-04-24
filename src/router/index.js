@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import { ROUTES } from "@/const";
 import Home from "@/pages/Home";
 import Clocks from "@/pages/Clocks";
+import DigitalClocks from "@/pages/DigitalClocks";
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,10 @@ const routes = [
         path: ROUTES.clocks,
         component: Clocks,
     },
+    {
+        path: ROUTES.digitalClocks,
+        component: DigitalClocks,
+    }
 ];
 
 const router = new VueRouter({
