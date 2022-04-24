@@ -4,22 +4,24 @@
     <div class="digital-clock-wrapper">
       <div class="digital-clock">
 
-        <div ref="sc" class="digital-clock__circle" style="--clr:#04fc43;"><i></i></div>
-        <div ref="mn" class="digital-clock__circle digital-clock__circle_2" style="--clr:#fee800;"><i></i></div>
-        <div ref="hr" class="digital-clock__circle digital-clock__circle_3" style="--clr:#ff2972;"><i></i></div>
+        <div class="digital-clock__circle" style="--clr:#04fc43;" :style="secondStyle"><i></i></div>
+        <div class="digital-clock__circle digital-clock__circle_2" style="--clr:#fee800;" :style="minuteStyle"><i></i></div>
+        <div class="digital-clock__circle digital-clock__circle_3" style="--clr:#ff2972;" :style="hourStyle"><i></i></div>
 
-        <span class="digital-clock__number" style="--i:1;"><b>1</b></span>
-        <span class="digital-clock__number" style="--i:2;"><b>2</b></span>
-        <span class="digital-clock__number" style="--i:3;"><b>3</b></span>
-        <span class="digital-clock__number" style="--i:4;"><b>4</b></span>
-        <span class="digital-clock__number" style="--i:5;"><b>5</b></span>
-        <span class="digital-clock__number" style="--i:6;"><b>6</b></span>
-        <span class="digital-clock__number" style="--i:7;"><b>7</b></span>
-        <span class="digital-clock__number" style="--i:8;"><b>8</b></span>
-        <span class="digital-clock__number" style="--i:9;"><b>9</b></span>
-        <span class="digital-clock__number" style="--i:10;"><b>10</b></span>
-        <span class="digital-clock__number" style="--i:11;"><b>11</b></span>
-        <span class="digital-clock__number" style="--i:12;"><b>12</b></span>
+        <span
+            v-for="index in 12"
+            class="digital-clock__number"
+            :style="`--i:${index};`"
+            :key="index">
+            <b>{{ index }}</b>
+        </span>
+      </div>
+
+      <div class="digital-time">
+        <div class="digital-time__item" style="--clr:#ff2972;">{{ hours }}</div>
+        <div class="digital-time__item" style="--clr:#fee800;">{{ minutes }}</div>
+        <div class="digital-time__item" style="--clr:#04fc43;">{{ seconds }}</div>
+        <div class="digital-time__item">{{ ampm }}</div>
       </div>
     </div>
   </div>
@@ -32,16 +34,57 @@ export default {
     components: { BackHome },
     data() {
         return {
-            hr: null,
-            mn: null,
-            sc: null,
+            day: null,
+            hh: null,
+            mm: null,
+            ss: null,
+            hours: null,
+            minutes: null,
+            seconds: null,
+            ampm: null,
+            colors: ["#04fc43", "#fee800", "#ff2972"],
         };
     },
 
     mounted() {
-        this.hr = this.$refs.hr;
-        this.mn = this.$refs.mn;
-        this.sc = this.$refs.hr;
+        this.changeTime();
+    },
+
+    computed: {
+        hourStyle() {
+            return { transform: `rotateZ(${this.hh + this.mm / 12}deg)` };
+        },
+        minuteStyle() {
+            return { transform: `rotateZ(${this.mm}deg)` };
+        },
+        secondStyle() {
+            return { transform: `rotateZ(${this.ss}deg)` };
+        },
+    },
+
+    methods: {
+        changeTime() {
+            setInterval(() => {
+                this.day = new Date();
+                this.hh = this.day.getHours() * 30;
+                this.mm = this.day.getMinutes() * 6;
+                this.ss = this.day.getSeconds() * 6;
+
+                this.hours = this.day.getHours();
+                this.minutes = this.day.getMinutes();
+                this.seconds = this.day.getSeconds();
+
+                this.ampm = this.hours >= 12 ? "PM" : "AM";
+
+                if (this.hours > 12) {
+                    this.hours = this.hours - 12;
+                }
+
+                this.hours = (this.hours < 10) ? "0" + this.hours : this.hours;
+                this.minutes = (this.minutes < 10) ? "0" + this.minutes : this.minutes;
+                this.seconds = (this.seconds < 10) ? "0" + this.seconds : this.seconds;
+            });
+        },
     },
 }
 </script>
@@ -58,9 +101,11 @@ export default {
 }
 
 .digital-clock-wrapper {
+  font-family: 'Poppins', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   position: relative;
   border-radius: 225px 225px 20px 20px;
   box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.75),
@@ -71,7 +116,6 @@ export default {
 }
 
 .digital-clock {
-  font-family: 'Poppins', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -159,6 +203,57 @@ export default {
       opacity: 0.25;
       display: inline-block;
       transform: rotate(calc(-30deg * var(--i)));
+    }
+  }
+}
+
+.digital-time {
+  display: flex;
+  margin-bottom: 40px;
+  padding: 20px 40px;
+  font-size: 2em;
+  font-weight: 600;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  border-radius: 40px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5),
+  inset 5px 5px 20px rgba(255, 255, 255, 0.2),
+  inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+
+  &__item {
+    position: relative;
+    width: 60px;
+    text-align: center;
+    font-weight: 500;
+    color: var(--clr);
+
+    &:nth-child(1)::after,
+    &:nth-child(2)::after {
+      content: ":";
+      position: absolute;
+      right: -4px;
+    }
+
+    &:last-child {
+      font-size: 0.5em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+
+    &:nth-child(2)::after {
+      animation: animate 1s steps(1) infinite;
+    }
+
+    @keyframes animate {
+      0%
+      {
+        opacity: 1;
+      }
+      50%
+      {
+        opacity: 0;
+      }
     }
   }
 }
