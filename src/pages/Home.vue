@@ -11,6 +11,11 @@
             :link="$options.ROUTES.digitalClocks"
             :link-text="'Digital Clocks'"
         />
+        <page-link
+            class="nav__link"
+            :link="$options.ROUTES.fingerprintScanner"
+            :link-text="'Fingerprint Scanner'"
+        />
     </nav>
   </div>
 </template>

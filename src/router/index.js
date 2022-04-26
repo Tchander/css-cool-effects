@@ -4,6 +4,7 @@ import { ROUTES } from "@/const";
 import Home from "@/pages/Home";
 import Clocks from "@/pages/Clocks";
 import DigitalClocks from "@/pages/DigitalClocks";
+import FingerprintScanner from "@/pages/FingerprintScanner";
 
 Vue.use(VueRouter);
 
@@ -19,6 +20,10 @@ const routes = [
     {
         path: ROUTES.digitalClocks,
         component: DigitalClocks,
+    },
+    {
+        path: ROUTES.fingerprintScanner,
+        component: FingerprintScanner,
     }
 ];
 
