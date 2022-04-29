@@ -3,4 +3,5 @@ export const ROUTES = {
     clocks: "/clocks",
     digitalClocks: "/digital-clocks",
     fingerprintScanner: "/fingerprint-scanner",
+    liquidBowl: "/liquid-bowl",
 };
