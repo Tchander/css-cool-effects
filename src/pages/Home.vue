@@ -16,6 +16,11 @@
             :link="$options.ROUTES.fingerprintScanner"
             :link-text="'Fingerprint Scanner'"
         />
+        <page-link
+            class="nav__link"
+            :link="$options.ROUTES.liquidBowl"
+            :link-text="'Liquid Bowl'"
+        />
     </nav>
   </div>
 </template>

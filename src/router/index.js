@@ -5,6 +5,7 @@ import Home from "@/pages/Home";
 import Clocks from "@/pages/Clocks";
 import DigitalClocks from "@/pages/DigitalClocks";
 import FingerprintScanner from "@/pages/FingerprintScanner";
+import LiquidBowl from "@/pages/LiquidBowl";
 
 Vue.use(VueRouter);
 
@@ -24,6 +25,10 @@ const routes = [
     {
         path: ROUTES.fingerprintScanner,
         component: FingerprintScanner,
+    },
+    {
+        path: ROUTES.liquidBowl,
+        component: LiquidBowl,
     }
 ];
 
